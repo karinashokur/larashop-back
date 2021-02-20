@@ -1,4 +1,4 @@
-.PHONY: build up logs down composer
+.PHONY: build up logs down composer artisan
 user := $(shell id -u):$(shell id -g)
 default: up
 build: .env
@@ -15,5 +15,7 @@ vendor: composer.json composer.lock
 	docker-compose run --rm --user $(user) php composer install
 composer:
 	docker-compose run --rm --user $(user) php composer $(filter-out $@,$(MAKECMDGOALS))
+artisan:
+	docker-compose exec php php artisan $(filter-out $@,$(MAKECMDGOALS))
 %:
 	@:
