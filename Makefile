@@ -1,4 +1,4 @@
-.PHONY: build up logs down composer artisan
+.PHONY: build up logs down restart composer artisan
 user := $(shell id -u):$(shell id -g)
 default: up
 build: .env
@@ -9,6 +9,7 @@ logs:
 	docker-compose logs -f
 down:
 	docker-compose down
+restart: down up
 .env:
 	cp .env.example .env
 vendor: composer.json composer.lock
