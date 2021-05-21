@@ -11,4 +11,8 @@ final class Product extends Model
     {
         $this->name = $productName->toString();
     }
+    public function setPrice(Money $price): void
+    {
+        $this->price = $price->getValue();
+    }
 }
