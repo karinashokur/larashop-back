@@ -8,7 +8,11 @@ final class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->char('uuid', 36);
+            $table->string('name');
+            $table->unsignedDecimal('price', 10);
             $table->timestamps();
+            $table->unique('uuid');
         });
     }
     public function down()
