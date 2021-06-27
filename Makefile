@@ -1,4 +1,4 @@
-.PHONY: build up logs down restart composer artisan lint lint-fix
+.PHONY: build up logs down restart composer artisan lint lint-fix tests
 user := $(shell id -u):$(shell id -g)
 default: up
 build: .env
@@ -22,5 +22,7 @@ lint:
 	docker-compose exec php vendor/bin/php-cs-fixer fix --verbose --dry-run --diff
 lint-fix:
 	docker-compose exec php vendor/bin/php-cs-fixer fix --verbose
+tests:
+	docker-compose exec php vendor/bin/phpunit $(filter-out $@,$(MAKECMDGOALS))
 %:
 	@:
